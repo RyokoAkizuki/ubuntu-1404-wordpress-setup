@@ -87,6 +87,7 @@ cat <<EOF >> /etc/apache2/sites-available/$var_domain.conf
 EOF
 
 chown -R www-data:www-data /var/www/$var_domain
+chmod -R 755 /var/www/$var_domain/html
 
 a2ensite $var_domain
 

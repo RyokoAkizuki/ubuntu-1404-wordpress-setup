@@ -70,6 +70,7 @@ cat <<EOF > /etc/apache2/mods-enabled/dir.conf
 EOF
 
 chown -R www-data:www-data /var/www/html
+chmod -R 755 /var/www/html
 
 # disable default site
 a2dissite 000-default.conf
