@@ -102,7 +102,6 @@ else
     cd /opt/letsencrypt
 fi
 
-echo "localhost $var_domain" >> /etc/hosts
-#./letsencrypt-auto --apache -d $var_domain # todo: alias
+./letsencrypt-auto --apache -d $var_domain # todo: alias
 
 service apache2 reload

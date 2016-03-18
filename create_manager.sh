@@ -46,11 +46,14 @@ fi
 
 var_managerdomain="$var_nodename.manager"
 
-linode domain record-delete $var_rootdomain A $var_managerdomain
 linode domain record-create $var_rootdomain A $var_managerdomain [remote_addr]
 
 ./create_ssl_site.sh -d $var_managerdomain.$var_rootdomain
 
 cd /var/www/$var_managerdomain.$var_rootdomain/html
-git clone https://github.com/phpmyadmin/phpmyadmin.git
+wget https://files.phpmyadmin.net/phpMyAdmin/4.5.5.1/phpMyAdmin-4.5.5.1-all-languages.tar.gz
+tar xvzf phpMyAdmin-4.5.5.1-all-languages.tar.gz
+mv phpMyAdmin-4.5.5.1-all-languages phpmyadmin
+rm phpMyAdmin-4.5.5.1-all-languages.tar.gz
 chown -R www-data:www-data /var/www/$var_managerdomain.$var_rootdomain
+chmod -R 755 /var/www/$var_managerdomain.$var_rootdomain/html
