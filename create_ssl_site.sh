@@ -103,6 +103,6 @@ else
     cd /opt/letsencrypt
 fi
 
-./letsencrypt-auto --apache -d $var_domain # todo: alias
+./letsencrypt-auto --agree-tos --redirect --apache -d $var_domain # todo: alias
 
 service apache2 reload
