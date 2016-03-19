@@ -10,6 +10,7 @@ usage()
 
 install_pptp()
 {
+    apt-get update
     apt-get -y install pptpd
 
     echo net.ipv4.ip_forward=1 >> /etc/sysctl.conf
@@ -21,6 +22,9 @@ install_pptp()
     echo ms-dns 8.8.8.8 >> /etc/ppp/pptpd-options
     echo ms-dns 8.8.4.4 >> /etc/ppp/pptpd-options
 
+    # http://askubuntu.com/questions/621820/pptpd-failed-after-upgrading-ubuntu-server-to-15
+    sed -i 's/^logwtmp\d*/#&/g' /etc/pptpd.conf
+    
     iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -o eth0 -j MASQUERADE
     iptables -A FORWARD -p tcp --syn -s 192.168.0.0/24 -j TCPMSS --set-mss 1356
 
@@ -28,7 +32,8 @@ install_pptp()
     mv temp.rc.local /etc/rc.local
     chmod +x /etc/rc.local
 
-    service pptpd restart
+    systemctl enable pptpd
+    systemctl restart pptpd
 }
 
 add_user()

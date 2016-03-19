@@ -46,6 +46,8 @@ EOF
 }
 
 apt-get -y install apache2
+systemctl start apache2
+systemctl enable apache2
 
 # install mysql
 # http://stackoverflow.com/questions/7739645/install-mysql-on-ubuntu-without-password-prompt
@@ -53,6 +55,8 @@ sudo debconf-set-selections <<< "mysql-server mysql-server/root_password passwor
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $mysql_password"
 apt-get -y install mysql-server mysql-client
 secure_mysql
+systemctl start mysql
+systemctl enable mysql
 
 # install php5
 apt-get -y install php5 php5-mysql libapache2-mod-php5
@@ -74,4 +78,7 @@ chmod -R 755 /var/www/html
 
 # disable default site
 a2dissite 000-default.conf
-service apache2 restart
+systemctl restart apache2
+
+systemctl status apache2
+systemctl status mysql
