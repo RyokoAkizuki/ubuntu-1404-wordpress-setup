@@ -58,8 +58,8 @@ secure_mysql
 systemctl start mysql
 systemctl enable mysql
 
-# install php5
-apt-get -y install php5 php5-mysql libapache2-mod-php5
+# install php
+apt-get -y install php7.0 php7.0-mysql libapache2-mod-php7.0 php-apcu
 
 # enable ssl for apache
 a2enmod ssl
@@ -80,5 +80,5 @@ chmod -R 755 /var/www/html
 a2dissite 000-default.conf
 systemctl restart apache2
 
-systemctl status apache2
-systemctl status mysql
+# systemctl status apache2
+# systemctl status mysql
