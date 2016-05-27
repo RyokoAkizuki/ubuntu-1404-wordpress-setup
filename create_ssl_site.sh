@@ -76,13 +76,14 @@ cat <<EOF >> /etc/apache2/sites-available/$var_domain.conf
     DocumentRoot /var/www/$var_domain/html
 
     <Directory /var/www/$var_domain/html>
-        Options FollowSymLinks
         AllowOverride All
         Require all granted
     </Directory>
 
     ErrorLog /var/www/$var_domain/log/error.log
     CustomLog /var/www/$var_domain/log/access.log combined
+
+    RedirectMatch 404 /\.git
 </VirtualHost>
 EOF
 
